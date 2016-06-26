@@ -12,7 +12,7 @@ public class Arbiter {
         AI_X0 ai =new AI_X0(0);
 
         while(isWinner(m.getMap())==2){
-            printMap();
+            printMap(m.getMap());
             m.setMap(inputMen());
             m.setMap(ai.WhatSetIJ(m.getMap()));
         }
@@ -21,8 +21,8 @@ public class Arbiter {
         else System.out.println("ones are winner");
     }
 
-    private static void printMap() {
-    
+    private static void printMap(int[][] map) {
+        
     }
 
     private static int[] inputMen() {
