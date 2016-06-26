@@ -16,20 +16,22 @@ public class Arbiter {
             m.setMap(inputMen());
             m.setMap(ai.WhatSetIJ(m.getMap()));
         }
+        printMap(m.getMap());
         if(isWinner(m.getMap())==0)
         System.out.println("zeros are Winner");
         else System.out.println("ones are winner");
     }
 
     private static void printMap(int[][] map) {
-        char wr = ' ';
+        char wr;
         System.out.println("===============");
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
                 switch (map[i][j]){
-                    case 0 : wr='0';
-                    case 1 : wr='X';
-                    case 2 : wr=' ';
+                    case 0 : wr='0';break;
+                    case 1 : wr='X';break;
+                    case 2 : wr=' ';break;
+                    default : wr=' ';break;
                 }
                 System.out.print(" | "+wr);
             }
@@ -55,9 +57,7 @@ public class Arbiter {
             if(i==0)System.out.println("write number of row");
             else System.out.println("write number of colum");
             s = scanner.nextLine();
-            System.out.println(s);
-            toSet[i] = Integer.parseInt(s);
-            System.out.println(toSet[i]);
+            toSet[i] = Integer.parseInt(s)-1;
         }
         return toSet;
     }
