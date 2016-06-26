@@ -22,18 +22,32 @@ public class Arbiter {
     }
 
     private static void printMap(int[][] map) {
-        
+        char wr = ' ';
+        System.out.println("===============");
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                switch (map[i][j]){
+                    case 0 : wr='0';
+                    case 1 : wr='X';
+                    case 2 : wr=' ';
+                }
+                System.out.print(" | "+wr);
+            }
+            System.out.print(" |\n -------------\n");
+        }
+        System.out.println("===============");
     }
 
     private static int[] inputMen() {
-        int[] toSet=new int[2];
-        for(int i=0;i<=1;i++) toSet = whereToSet();
+        int[] toSet=new int[3];
+        int[] tmpToSet=whereToSet();
+        for(int i=0;i<=1;i++) toSet[i]=tmpToSet[i];
         toSet[2] = 1;
         return toSet;
     }
 
     private static int[] whereToSet() {
-        int[]toSet=new int[1];
+        int[]toSet=new int[2];
         Scanner scanner=new Scanner(System.in);
         String s;
         for(int i=0;i<=1;i++) {
@@ -41,7 +55,9 @@ public class Arbiter {
             if(i==0)System.out.println("write number of row");
             else System.out.println("write number of colum");
             s = scanner.nextLine();
+            System.out.println(s);
             toSet[i] = Integer.parseInt(s);
+            System.out.println(toSet[i]);
         }
         return toSet;
     }
