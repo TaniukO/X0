@@ -31,20 +31,23 @@ class AI_minmax {
     }
 
 //============================================
-    public int ai(int[][] map) {
+    public int ai(MapX0 map) {
         int r=Math.round(ai(map,0));
-        System.out.println(r);
+        //System.out.println(r);
         return  r;
 
     }
 
-    float ai(int[][] map,int far) {
+    float ai(MapX0 mapToCopy,int far) {
+        MapX0 map=new MapX0(mapToCopy);
+        int isWiner;
         List<Float> tmpAlfas = new LinkedList<Float>();
-        while(isThereTurn(map)) {
-            switch (Arbiter.isWinner(map)) {
+        while(map.isThereTurn()) {
+            isWiner=map.isWinner();
+            switch (isWiner) {
                 case 2:
-                    int[] flag = freeChangeFlag(map);
-                    map[flag[0]][flag[1]] = 3;
+                    int[] flag = freeChangeFlag(map.getMap());
+                    map.setFlag(flag[0],flag[1],map.getNextFlag());
                     tmpAlfas.add(ai(map, far + 1));
                     break;
                 case 0:
@@ -59,17 +62,18 @@ class AI_minmax {
             }
         }
 
-        float maxAlfa=-1;
+        float maxAlfa=(-1);
         for (int i =0;i<tmpAlfas.size();i++) {
             if(maxAlfa<tmpAlfas.get(i))
                 maxAlfa=tmpAlfas.get(i);
         }
 
         if(far==0){
+            map.printTraserMap();
             return tmpAlfas.indexOf(maxAlfa);
         }
 
-        maxAlfa= (float) ( (double) maxAlfa/Math.pow(2,far));
+        maxAlfa= (float) ( (double) maxAlfa/2);
         return maxAlfa;
     }
 //==================================================================
@@ -95,12 +99,5 @@ class AI_minmax {
     }
 
 
-    public boolean isThereTurn(int[][] map) {
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(map[j][i]==2) return true;
-            }
-        }
-        return false;
-    }
+
 }

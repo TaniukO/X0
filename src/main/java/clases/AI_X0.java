@@ -18,31 +18,31 @@ public class AI_X0 {
         }
     }
 
-    public int[] ai(int[][] map) {
-        int[] flag = changeFlag(map);
+    public int[] ai(MapX0 map) {
+        int[] flag = changeFlag(map.getMap());
 
         if (aiGraph(flag, map) == true) {
             return flag;
 
         } else {
-            map[flag[0]][flag[1]] = 3;
+            map.setFlag(flag[0],flag[1],3);
             ai(map);
         }
         int[] r={0,0,AI_FLAG};
         return r;
     }
 
-        private boolean aiGraph(int[] flag,int[][] map){
+        private boolean aiGraph(int[] flag,MapX0 map){
 
-            if(Arbiter.isWinner(map)==2) {
+            if(map.isWinner()==2) {
 
-                map[flag[0]][flag[1]]=flag[2];
-                flag=changeFlag(map);
+                map.setFlag(flag[0],flag[1],flag[2]);
+                flag=changeFlag(map.getMap());
                 aiGraph(flag,map);
             }else{
-                if(Arbiter.isWinner(map)==AI_FLAG) return true;
+                if(map.isWinner()==AI_FLAG) return true;
                 else{
-                    if(Arbiter.isWinner(map)==man_FLAG /*or isWiner()==FLAG_EQALS*/) return false;
+                    if(map.isWinner()==man_FLAG /*or isWiner()==FLAG_EQALS*/) return false;
                 }
             }
             return false;
